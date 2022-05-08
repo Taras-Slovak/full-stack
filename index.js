@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 });
 
 // Get product details
-app.get('/products/:productId?api_key=', async (req, res) => {
+app.get('/products/:productId', async (req, res) => {
   const { productId } = req.params;
   const { api_key } = req.query;
 
@@ -62,7 +62,7 @@ app.get('/products/:productId/offers', async (req, res) => {
     const response = await request(
       `${generateScraperApi(
         api_key,
-      )}&url=https://www.amazon.com/gp/offer-listing${productId}`,
+      )}&url=https://www.amazon.com/gp/offer-listing/${productId}`,
     );
 
     res.json(JSON.parse(response));
