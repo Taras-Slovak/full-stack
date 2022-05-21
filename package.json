@@ -1,0 +1,31 @@
+{
+  "name": "cli-weather",
+  "version": "1.0.0",
+  "description": "CLI for getting weather",
+  "main": "weather.js",
+  "bin": {
+    "weather": "weather.js"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node weather.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Taras-Slovak/node.js.git"
+  },
+  "keywords": [
+    "weather",
+    "cli"
+  ],
+  "author": "Taras Slovak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Taras-Slovak/node.js/issues"
+  },
+  "homepage": "https://github.com/Taras-Slovak/node.js#readme",
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}
