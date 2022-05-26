@@ -1,5 +1,7 @@
+
 import { Router } from "express";
 import { LoggerService } from "../logger/logger.service";
+import { IControllerRoute } from "./route.interface";
 
 export abstract class BaseController {
   private readonly _router = Router();
@@ -12,7 +14,7 @@ export abstract class BaseController {
     return this._router;
   }
 
-  protected bindRoutes(routes: any[]) {
+  protected bindRoutes(routes: IControllerRoute[]) {
     this.router.get('path', func);
   }
 }
