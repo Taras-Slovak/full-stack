@@ -25,8 +25,13 @@ export class App {
     this.app.use('/users', this.usersController.router);
   }
 
+  useExceptionFilters() {
+
+  }
+
   public async init() {
     this.useRoutes();
+    this.useExceptionFilters();
     this.server = this.app.listen(this.port);
     this.logger.log(`Server started on http://localhost:${this.port}`);
   }
