@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { LoggerService } from "../logger/logger.service";
 import { IExceptionFilter } from "./exception.filter.interface";
 import { HTTPError } from "./http-error.class";
-export class exceptionFilter implements IExceptionFilter {
+export class ExceptionFilter implements IExceptionFilter {
   logger: LoggerService;
   constructor(logger: LoggerService) {
     this.logger = logger;

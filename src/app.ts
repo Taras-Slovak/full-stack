@@ -3,7 +3,7 @@ import express, { Express } from "express";
 
 import { Server } from "http"
 import { LoggerService } from './logger/logger.service';
-import { exceptionFilter } from './error/exception.filter';
+import { ExceptionFilter } from './error/exception.filter';
 
 export class App {
   app: Express;
@@ -11,12 +11,12 @@ export class App {
   port: number;
   logger: LoggerService;
   usersController: UsersController;
-  exceptionFilter: exceptionFilter;
+  exceptionFilter: ExceptionFilter;
 
   constructor(
     logger: LoggerService,
     usersController: UsersController,
-    exceptionFilter: exceptionFilter
+    exceptionFilter: ExceptionFilter
   ) {
     this.app = express();
     this.port = 8000;
