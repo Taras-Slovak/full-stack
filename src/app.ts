@@ -3,6 +3,7 @@ import express, { Express } from "express";
 
 import { Server } from "http"
 import { LoggerService } from './logger/logger.service';
+import { exceptionFilter } from './error/exception.filter';
 
 export class App {
   app: Express;
@@ -10,15 +11,18 @@ export class App {
   port: number;
   logger: LoggerService;
   usersController: UsersController;
+  exceptionFilter: exceptionFilter;
 
   constructor(
     logger: LoggerService,
-    usersController: UsersController
+    usersController: UsersController,
+    exceptionFilter: exceptionFilter
   ) {
     this.app = express();
     this.port = 8000;
     this.logger = logger;
     this.usersController = usersController;
+    this.exceptionFilter = exceptionFilter;
   }
 
   useRoutes() {
@@ -26,7 +30,7 @@ export class App {
   }
 
   useExceptionFilters() {
-
+    this.app.use(this.exceptionFilter.catch.bind(this.exceptionFilter))
   }
 
   public async init() {
