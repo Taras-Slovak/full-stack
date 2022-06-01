@@ -4,6 +4,7 @@ import { NextFunction, Request, Response } from 'express';
 import { HTTPError } from '../error/http-error.class';
 import { inject, injectable } from 'inversify';
 import { TYPES } from '../types';
+import 'reflect-metadata';
 
 @injectable()
 export class UsersController extends BaseController {
