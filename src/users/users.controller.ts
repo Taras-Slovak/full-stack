@@ -8,19 +8,18 @@ import 'reflect-metadata';
 
 @injectable()
 export class UsersController extends BaseController {
-  constructor(
-    @inject(TYPES.ILogger) loggerService: LoggerService) {
+  constructor(@inject(TYPES.ILogger) loggerService: LoggerService) {
     super(loggerService);
     this.bindRoutes([
       { path: '/register', method: 'post', func: this.register },
-      { path: '/login', method: 'post', func: this.login }
-    ])
+      { path: '/login', method: 'post', func: this.login },
+    ]);
   }
-  login(req: Request, res: Response, next: NextFunction) {
+  login(req: Request, res: Response, next: NextFunction): void {
     next(new HTTPError(401, `error of authorization`));
   }
 
-  register(req: Request, res: Response, next: NextFunction) {
+  register(req: Request, res: Response, next: NextFunction): void {
     this.ok(res, 'login');
   }
 }

@@ -12,9 +12,14 @@ export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
   bind<IExceptionFilter>(TYPES.ExceptionFilter).to(ExceptionFilter);
   bind<UsersController>(TYPES.UsersController).to(UsersController);
   bind<App>(TYPES.Application).to(App);
-})
+});
 
-function bootstrap() {
+export interface IBootstrapReturn {
+  appContainer: Container;
+  app: App;
+}
+
+function bootstrap(): IBootstrapReturn {
   const appContainer = new Container();
   appContainer.load(appBindings);
   const app = appContainer.get<App>(TYPES.Application);
