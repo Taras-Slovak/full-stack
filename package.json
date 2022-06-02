@@ -3,13 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
+    "start": "node ./dist/main.js",
     "dev": "nodemon",
-    "start": "node --experimental-modules --es-module-specifier-resolution=node ./dist/main.js",
-    "build": "tsc",
+    "dev:inspect": "nodemon -e ts,json --exec node --inspect=localhost:9222 -r ts-node/register src/main.ts",
     "lint": "eslint ./src/**",
-    "lint:fix": "eslint ./src/** --fix"
+    "test": "jest",
+    "test:e2e": "jest --config jest.e2e.config.ts --coverage",
+    "generate": "prisma generate",
+    "lint:fix": "eslint ./src/** --fix",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
