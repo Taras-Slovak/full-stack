@@ -17,7 +17,6 @@ export class UsersController extends BaseController {
   }
 
   login(req: Request, res: Response, next: NextFunction): void {
-    console.log('TESTING');
     next(new HTTPError(401, `error of authorization`));
   }
 
