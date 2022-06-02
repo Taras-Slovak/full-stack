@@ -5,6 +5,7 @@
   "main": "main.js",
   "type": "module",
   "scripts": {
+    "dev": "nodemon",
     "start": "node --experimental-modules --es-module-specifier-resolution=node ./dist/main.js",
     "build": "tsc",
     "lint": "eslint ./src/**",
