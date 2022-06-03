@@ -5,8 +5,8 @@ import { HTTPError } from '../error/http-error.class';
 import { inject, injectable } from 'inversify';
 import { TYPES } from '../types';
 import 'reflect-metadata';
-import { UsersLoginDto } from './dto/users-login.dto';
-import { UsersRegisterDto } from './dto/users-register.dto';
+import { UserLoginDto } from './dto/user-login.dto';
+import { UserRegisterDto } from './dto/user-register.dto';
 
 @injectable()
 export class UsersController extends BaseController {
@@ -18,11 +18,11 @@ export class UsersController extends BaseController {
     ]);
   }
 
-  login(req: Request<{}, {}, UsersLoginDto>, res: Response, next: NextFunction): void {
+  login(req: Request<{}, {}, UserLoginDto>, res: Response, next: NextFunction): void {
     next(new HTTPError(401, `error of authorization`));
   }
 
-  register(req: Request<{}, {}, UsersRegisterDto>, res: Response, next: NextFunction): void {
+  register(req: Request<{}, {}, UserRegisterDto>, res: Response, next: NextFunction): void {
     this.ok(res, 'login');
   }
 }
