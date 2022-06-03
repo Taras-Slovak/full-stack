@@ -7,6 +7,7 @@ import { TYPES } from '../types';
 import 'reflect-metadata';
 import { UserLoginDto } from './dto/user-login.dto';
 import { UserRegisterDto } from './dto/user-register.dto';
+import { User } from './user.entity';
 
 @injectable()
 export class UsersController extends BaseController {
@@ -22,7 +23,13 @@ export class UsersController extends BaseController {
     next(new HTTPError(401, `error of authorization`));
   }
 
-  register(req: Request<{}, {}, UserRegisterDto>, res: Response, next: NextFunction): void {
-    this.ok(res, 'login');
+  async register(
+    { body }: Request<{}, {}, UserRegisterDto>,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
+    const newUser = new User(body.email, body.name);
+    await newUser.setPassword(body.password);
+    this.ok(res, newUser);
   }
 }
