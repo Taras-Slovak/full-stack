@@ -1,6 +1,8 @@
 /node_modules
 /dist
 /.pnp
+/prisma/dev.db
+/prisma/dev.db-journal
 .pnp.js
 
 # testing
