@@ -14,11 +14,11 @@ import { IUsersService } from './users/users.service.interface';
 
 export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
   bind<ILogger>(TYPES.ILogger).to(LoggerService).inSingletonScope();
-  bind<IExceptionFilter>(TYPES.ExceptionFilter).to(ExceptionFilter).inSingletonScope();
-  bind<IUsersController>(TYPES.UsersController).to(UsersController).inSingletonScope();
-  bind<IUsersService>(TYPES.UsersService).to(UsersService).inSingletonScope();
+  bind<IExceptionFilter>(TYPES.ExceptionFilter).to(ExceptionFilter);
+  bind<IUsersController>(TYPES.UsersController).to(UsersController);
+  bind<IUsersService>(TYPES.UsersService).to(UsersService);
   bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
-  bind<App>(TYPES.Application).to(App).inSingletonScope();
+  bind<App>(TYPES.Application).to(App);
 });
 
 export interface IBootstrapReturn {
