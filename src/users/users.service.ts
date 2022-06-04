@@ -11,8 +11,8 @@ export class UsersService implements IUsersService {
   constructor(@inject(TYPES.ConfigService) private configService: IConfigService) {}
   async createUser({ email, name, password }: UserRegisterDto): Promise<User | null> {
     const newUser = new User(email, name);
-    const salt = this.configService.get<number>('SALT');
-    await newUser.setPassword(password, salt);
+    const salt = this.configService.get('SALT');
+    await newUser.setPassword(password, Number(salt));
     return null;
   }
 
