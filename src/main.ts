@@ -18,7 +18,7 @@ export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
   bind<IUsersController>(TYPES.UsersController).to(UsersController).inSingletonScope();
   bind<IUsersService>(TYPES.UsersService).to(UsersService).inSingletonScope();
   bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
-  bind<App>(TYPES.Application).to(App);
+  bind<App>(TYPES.Application).to(App).inSingletonScope();
 });
 
 export interface IBootstrapReturn {
