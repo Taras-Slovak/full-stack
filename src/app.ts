@@ -28,7 +28,7 @@ export class App {
   }
 
   useMiddleware(): void {
-    this.app.use(json);
+    this.app.use(json());
   }
 
   useRoutes(): void {

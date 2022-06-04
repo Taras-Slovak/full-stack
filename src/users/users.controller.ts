@@ -22,7 +22,7 @@ export class UsersController extends BaseController {
         path: '/register',
         method: 'post',
         func: this.register,
-        middleware: [new ValidateMiddleware(UserRegisterDto)],
+        middlewares: [new ValidateMiddleware(UserRegisterDto)],
       },
       { path: '/login', method: 'post', func: this.login },
     ]);
