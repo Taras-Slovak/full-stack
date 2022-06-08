@@ -33,6 +33,12 @@ export class UsersController extends BaseController {
         func: this.login,
         middlewares: [new ValidateMiddleware(UserLoginDto)],
       },
+      {
+        path: '/info',
+        method: 'get',
+        func: this.info,
+        middlewares: [new AuthGuard()],
+      },
     ]);
   }
 
@@ -59,6 +65,11 @@ export class UsersController extends BaseController {
       return next(new HTTPError(422, 'this user already exists'));
     }
     this.ok(res, { email: result.email, id: result.id });
+  }
+
+  async info({ user }: Request, res: Response, next: NextFunction): Promise<void> {
+    const userInfo = await this.usersService.getUserInfo(user);
+    this.ok(res, { email: user });
   }
 
   private signJWT(email: string, secret: string): Promise<string> {
