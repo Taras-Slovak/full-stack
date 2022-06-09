@@ -12,9 +12,10 @@ import { sign } from 'jsonwebtoken';
 import { IConfigService } from '../config/config.service.interface';
 import { IUsersService } from './users.service.interface';
 import { AuthGuard } from '../common/auth.guard';
+import { IUsersController } from './users.controller.interface';
 
 @injectable()
-export class UsersController extends BaseController {
+export class UsersController extends BaseController implements IUsersController {
   constructor(
     @inject(TYPES.ILogger) private loggerService: ILogger,
     @inject(TYPES.UsersService) private usersService: IUsersService,
