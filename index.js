@@ -30,7 +30,7 @@ app.post('/auth/register', requireValidation, async (req, res) => {
   }
 
   const password = req.body.password;
-  const sold = await bcrypt.genSalt(10);
+  const salt = await bcrypt.genSalt(10);
   const passwordHash = await bcrypt.hash(password, salt);
 
   const doc = new UserModel({
