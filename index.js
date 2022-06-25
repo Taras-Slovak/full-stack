@@ -1,4 +1,5 @@
 import express from 'express';
+import 'dotenv/config';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
@@ -8,9 +9,11 @@ import { requireValidation } from './validations/auth.js';
 
 import UserModel from './models/User.js';
 
+const myPass = process.env.PASS;
+
 mongoose
   .connect(
-    'mongodb+srv://TarasFromUa:ad3037KYZ@blog.rkhn2ff.mongodb.net/blog?retryWrites=true&w=majority',
+    `mongodb+srv://TarasFromUa:${myPass}@blog.rkhn2ff.mongodb.net/blog?retryWrites=true&w=majority`,
   )
   .then(() => {
     console.log('DB OK');
@@ -22,6 +25,11 @@ mongoose
 const app = express();
 
 app.use(express.json());
+
+app.post('/auth/login', (req, res) => {
+  try {
+  } catch (error) {}
+});
 
 app.post('/auth/register', requireValidation, async (req, res) => {
   try {
