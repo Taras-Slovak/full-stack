@@ -8,6 +8,7 @@ import { validationResult } from 'express-validator';
 import { requireValidation } from './validations/auth.js';
 
 import UserModel from './models/User.js';
+import checkAuth from './utils/checkAuth.js';
 
 const myPass = process.env.PASS;
 
@@ -99,6 +100,24 @@ app.post('/auth/register', requireValidation, async (req, res) => {
     console.log(e);
     res.status(500).json({
       message: 'Can not register',
+    });
+  }
+});
+
+app.get('/auth/me', checkAuth, async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    const { passwordHash, ...userData } = user._doc;
+
+    res.json(userData);
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({
+      message: 'No access',
     });
   }
 });
