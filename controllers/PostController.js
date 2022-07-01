@@ -42,6 +42,32 @@ export const getOne = async (req, res) => {
   }
 };
 
+export const remove = async (req, res) => {
+  try {
+    const postId = req.params.id;
+    PostModel.findOneAndDelete({ _id: postId }, (err, doc) => {
+      if (err) {
+        return res.status(500).json({
+          message: 'Unable to delete the article',
+        });
+      }
+      if (!doc) {
+        return res.status(404).json({
+          message: 'Article not found',
+        });
+      }
+      return res.json({
+        success: true,
+      });
+    });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({
+      message: 'Unable to retrieve the article',
+    });
+  }
+};
+
 export const create = async (req, res) => {
   try {
     const doc = new PostModel({
