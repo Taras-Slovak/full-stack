@@ -12,6 +12,36 @@ export const getAll = async (req, res) => {
   }
 };
 
+export const getOne = async (req, res) => {
+  try {
+    const postId = req.params.id;
+    PostModel.findOneAndUpdate(
+      { _id: postId },
+      { $inc: { viewsCount: 1 } },
+      { returnDocument: 'after' },
+      (err, doc) => {
+        if (err) {
+          return res.status(500).json({
+            message: 'Unable to retrieve the article',
+          });
+        }
+        if (!doc) {
+          return res.status(404).json({
+            message: 'Article not found',
+          });
+        }
+
+        return res.json(doc);
+      },
+    );
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({
+      message: 'Unable to retrieve articles',
+    });
+  }
+};
+
 export const create = async (req, res) => {
   try {
     const doc = new PostModel({
