@@ -1,4 +1,16 @@
 import PostModel from '../models/Post.js';
+
+export const getAll = async (req, res) => {
+  try {
+    const posts = await PostModel.find();
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({
+      message: 'Unable to retrieve articles',
+    });
+  }
+};
+
 export const create = async (req, res) => {
   try {
     const doc = new PostModel({
