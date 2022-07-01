@@ -3,7 +3,7 @@ import 'dotenv/config';
 import mongoose from 'mongoose';
 import { requireValidation } from './validations/auth.js';
 import checkAuth from './utils/checkAuth.js';
-import { getMe, login, register } from './controllers/UserController.js';
+import * as UserController from './controllers/UserController.js';
 
 const myPass = process.env.PASS;
 
@@ -22,11 +22,11 @@ const app = express();
 
 app.use(express.json());
 
-app.post('/auth/login', login);
+app.post('/auth/login', UserController.login);
 
-app.post('/auth/register', requireValidation, register);
+app.post('/auth/register', requireValidation, UserController.register);
 
-app.get('/auth/me', checkAuth, getMe);
+app.get('/auth/me', checkAuth, UserController.getMe);
 
 const port = 1456;
 
