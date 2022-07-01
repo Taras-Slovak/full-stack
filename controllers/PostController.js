@@ -72,7 +72,7 @@ export const create = async (req, res) => {
   try {
     const doc = new PostModel({
       title: req.body.title,
-      text: req.body.title,
+      text: req.body.text,
       imageUrl: req.body.imageUrl,
       tags: req.body.tags,
       user: req.userId,
@@ -85,6 +85,28 @@ export const create = async (req, res) => {
     console.error(e);
     res.status(500).json({
       message: 'Failed to create an article',
+    });
+  }
+};
+
+export const update = async (req, res) => {
+  try {
+    const postId = req.params.id;
+    PostModel.updateOne(
+      { _id: postId },
+      {
+        title: req.body.title,
+        text: req.body.text,
+        imageUrl: req.body.imageUrl,
+        tags: req.body.tags,
+        user: req.userId,
+      },
+    );
+    res.json({ success: true });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({
+      message: 'Unable to update the article',
     });
   }
 };
