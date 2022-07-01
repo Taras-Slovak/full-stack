@@ -1,7 +1,7 @@
 import express from 'express';
 import 'dotenv/config';
 import mongoose from 'mongoose';
-import { requireValidation } from './validations/auth.js';
+import { loginValidation, requireValidation } from './validations.js';
 import checkAuth from './utils/checkAuth.js';
 import * as UserController from './controllers/UserController.js';
 
@@ -9,7 +9,7 @@ const myPass = process.env.PASS;
 
 mongoose
   .connect(
-    `mongodb+srv://TarasFromUa:ad3037KYZ@blog.rkhn2ff.mongodb.net/blog?retryWrites=true&w=majority`,
+    `mongodb+srv://TarasFromUa:${myPass}@blog.rkhn2ff.mongodb.net/blog?retryWrites=true&w=majority`,
   )
   .then(() => {
     console.log('DB OK');
@@ -22,7 +22,7 @@ const app = express();
 
 app.use(express.json());
 
-app.post('/auth/login', UserController.login);
+app.post('/auth/login', loginValidation, UserController.login);
 
 app.post('/auth/register', requireValidation, UserController.register);
 
