@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import {
   loginValidation,
   postCreateValidation,
-  requireValidation,
+  registerValidation,
 } from './validations.js';
 import checkAuth from './utils/checkAuth.js';
 import * as UserController from './controllers/UserController.js';
