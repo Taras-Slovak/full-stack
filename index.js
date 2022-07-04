@@ -11,6 +11,7 @@ import * as UserController from './controllers/UserController.js';
 import * as PostController from './controllers/PostController.js';
 
 import multer from 'multer';
+import handlerValidationErrors from './utils/handlerValidationErrors.js';
 
 const myPass = process.env.PASS;
 
@@ -41,8 +42,18 @@ const upload = multer({ storage });
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
-app.post('/auth/login', loginValidation, UserController.login);
-app.post('/auth/register', requireValidation, UserController.register);
+app.post(
+  '/auth/login',
+  loginValidation,
+  handlerValidationErrors,
+  UserController.login,
+);
+app.post(
+  '/auth/register',
+  handlerValidationErrors,
+  registerValidation,
+  UserController.register,
+);
 app.get('/auth/me', checkAuth, UserController.getMe);
 
 app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
