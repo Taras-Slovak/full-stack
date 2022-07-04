@@ -1,17 +1,15 @@
 import express from 'express';
+import multer from 'multer';
 import 'dotenv/config';
 import mongoose from 'mongoose';
+
 import {
   loginValidation,
   postCreateValidation,
   registerValidation,
 } from './validations.js';
-import checkAuth from './utils/checkAuth.js';
-import * as UserController from './controllers/UserController.js';
-import * as PostController from './controllers/PostController.js';
-
-import multer from 'multer';
-import handlerValidationErrors from './utils/handlerValidationErrors.js';
+import { handlerValidationErrors, checkAuth } from './utils/index.js';
+import { UserController, PostController } from './controllers/index.js';
 
 const myPass = process.env.PASS;
 
