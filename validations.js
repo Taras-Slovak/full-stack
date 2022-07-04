@@ -10,7 +10,7 @@ export const loginValidation = [
   body('avatarUrl', 'Incorrect link to avatar').optional().isURL(),
 ];
 
-export const requireValidation = [
+export const registerValidation = [
   body('email', 'Email is not valid').isEmail(),
   body(
     'password',

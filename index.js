@@ -10,6 +10,9 @@ import checkAuth from './utils/checkAuth.js';
 import * as UserController from './controllers/UserController.js';
 import * as PostController from './controllers/PostController.js';
 
+import multer from 'multer';
+import handlerValidationErrors from './utils/handlerValidationErrors.js';
+
 const myPass = process.env.PASS;
 
 mongoose
@@ -25,11 +28,39 @@ mongoose
 
 const app = express();
 
-app.use(express.json());
+const storage = multer.diskStorage({
+  destination: (_, __, cb) => {
+    cb(null, uploads);
+  },
+  filename: (_, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
 
-app.post('/auth/login', loginValidation, UserController.login);
-app.post('/auth/register', requireValidation, UserController.register);
+const upload = multer({ storage });
+
+app.use(express.json());
+app.use('/uploads', express.static('uploads'));
+
+app.post(
+  '/auth/login',
+  loginValidation,
+  handlerValidationErrors,
+  UserController.login,
+);
+app.post(
+  '/auth/register',
+  handlerValidationErrors,
+  registerValidation,
+  UserController.register,
+);
 app.get('/auth/me', checkAuth, UserController.getMe);
+
+app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
+  res.json({
+    url: `/uploads/${req.file.originalname}`,
+  });
+});
 
 app.get('/posts', PostController.getAll);
 app.get('/posts/:id', PostController.getOne);
